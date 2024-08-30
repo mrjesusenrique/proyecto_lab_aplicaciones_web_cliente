@@ -1,4 +1,3 @@
-import { getProducts, getCategories } from "./api/api.js";
+import createCards from "./app/card/card.js";
 
-getProducts();
-getCategories();
+createCards();
