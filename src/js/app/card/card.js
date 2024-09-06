@@ -29,7 +29,7 @@ const createCards = () => {
     });
 
     const buttons = cardContainer.querySelectorAll(".btn-primary");
-    console.log(buttons);
+
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         const productTitle = button.dataset.productTitle;
@@ -41,8 +41,8 @@ const createCards = () => {
 
 function handleProductClick(productTitle) {
   const boton = document.getElementById("detailModal");
-const eventoClic = new MouseEvent('click');
-boton.dispatchEvent(eventoClic);
+  const eventoClic = new MouseEvent("click");
+  boton.dispatchEvent(eventoClic);
 }
 
 export default createCards;
