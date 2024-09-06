@@ -4,8 +4,8 @@ let cardContainer = document.querySelector("#template-card");
 
 const createCards = () => {
   getProducts().then((data) => {
-    data.map((product) => {
-      const { image, title } = product;
+    data.map((product, i) => {
+      const { image, title, price } = product;
       let card = `
         <div class="col" key="${title}">
           <div class="d-flex flex-column card pt-5 pb-5" style="height: 550px">
@@ -15,9 +15,12 @@ const createCards = () => {
             </div>
             <div class="d-flex justify-content-center">
               <button
+                id="button_${i}"
                 type="button"
-                class="btn btn-primary w-50"
+                class="btn btn-primary w-50 detailButton"
                 data-product-title="${title}"
+                data-product-price="${price}"
+                data-product-image="${image}"
               >
                 Detalle
               </button>
@@ -28,21 +31,35 @@ const createCards = () => {
       cardContainer.innerHTML += card;
     });
 
-    const buttons = cardContainer.querySelectorAll(".btn-primary");
+    const buttons = cardContainer.querySelectorAll(".detailButton");
 
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         const productTitle = button.dataset.productTitle;
-        handleProductClick(productTitle);
+        const productPrice = button.dataset.productPrice;
+        const productImage = button.dataset.productImage;
+
+        handleProductClick(productTitle, productPrice, productImage);
       });
     });
   });
 };
 
-function handleProductClick(productTitle) {
+function handleProductClick(productTitle, productPrice, productImage) {
   const boton = document.getElementById("detailModal");
   const eventoClic = new MouseEvent("click");
   boton.dispatchEvent(eventoClic);
+
+  const headerModalTitle = document.querySelector("#headerModalLabel");
+  headerModalTitle.textContent = productTitle;
+
+  const modalImage = document.querySelector("#modalImage");
+  modalImage.src = productImage;
+  modalImage.alt = productTitle;
+  modalImage.title = productTitle;
+
+  const modalPrice = document.querySelector("#modalPrice");
+  modalPrice.textContent = `$${productPrice}`;
 }
 
 export default createCards;
