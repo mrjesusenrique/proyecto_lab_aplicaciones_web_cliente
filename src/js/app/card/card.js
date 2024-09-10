@@ -45,7 +45,7 @@ const createCards = () => {
   });
 };
 
-function handleProductClick(productTitle, productPrice, productImage) {
+const handleProductClick = (productTitle, productPrice, productImage) => {
   const boton = document.getElementById("detailModal");
   const eventoClic = new MouseEvent("click");
   boton.dispatchEvent(eventoClic);
@@ -60,6 +60,20 @@ function handleProductClick(productTitle, productPrice, productImage) {
 
   const modalPrice = document.querySelector("#modalPrice");
   modalPrice.textContent = `$${productPrice}`;
-}
+
+  const addProductButton = document.querySelector("#addProduct");
+  addProductButton.addEventListener("click", () => {
+    const product = {
+      title: productTitle,
+      price: productPrice,
+      image: productImage,
+    };
+
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products.push(product);
+
+    localStorage.setItem("products", JSON.stringify(products));
+  });
+};
 
 export default createCards;
