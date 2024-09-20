@@ -1,3 +1,5 @@
+import { aside } from "../aside/aside.js";
+
 export const renderButtonShop = () => {
   document.addEventListener("DOMContentLoaded", function () {
     const shopButton = document.createElement("button");
@@ -9,6 +11,12 @@ export const renderButtonShop = () => {
     document.querySelector("#navbar").appendChild(shopButton);
 
     updateCartIcon(iconShopButton);
+
+    shopButton.addEventListener("click", function () {
+      const offcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
+      offcanvas.show();
+      aside();
+    });
 
     observeLocalStorageChange(iconShopButton);
   });
