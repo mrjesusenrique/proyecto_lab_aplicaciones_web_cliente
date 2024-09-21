@@ -1,3 +1,5 @@
+import { showMessage } from "../showMessage/showMessage.js";
+
 const plantillaCarEmpty = () => {
   return `
       <div class="alert alert-info text-center" role="alert">
@@ -12,7 +14,13 @@ export const aside = () => {
 
   if (producStorage.length === 0) {
     body.innerHTML = plantillaCarEmpty();
+    
     return;
+  }
+
+  if(producStorage.length){
+    let btnsCart=document.querySelector("#btns-cart");
+    btnsCart.style.display="block";
   }
 
   producStorage.forEach((p) => {
@@ -49,6 +57,8 @@ export const aside = () => {
     `;
 
     body.innerHTML += aside;
+
+
 
     setTimeout(() => {
       const spanQuantity = document.querySelector(`#quantity-${p.id}`);
@@ -90,7 +100,6 @@ export const aside = () => {
         const objLocalStorage = JSON.parse(localStorage.getItem("productsCar"));
         const index = objLocalStorage.findIndex((prod) => prod.id === p.id);
         p.quantity -= 1;
-
         if (p.quantity === 0) {
           deleteProduct();
         } else {
@@ -109,11 +118,31 @@ export const aside = () => {
         document.querySelector(`#card-${p.id}`).remove();
         if (objLocalStorage.length === 0) {
           body.innerHTML = plantillaCarEmpty();
+          console.log("eliminar")
+          let btnsCart = document.querySelector("#btns-cart");
+          btnsCart.style.display = "none";
         }
         localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
+        showMessage("Producto eliminado del carrito");
       };
 
       updateButtons();
     }, 0);
   });
+
+  let btnFinalizar=document.querySelector('#btn-finalizar');
+  btnFinalizar.onclick = () => {
+    localStorage.clear();
+    body.innerHTML = plantillaCarEmpty();
+    let btnsCart = document.querySelector("#btns-cart");
+    btnsCart.style.display = "none";
+  };
+
+  let btnCancelar=document.querySelector('#btn-cancelar');
+  btnCancelar.onclick = () => {
+    localStorage.clear();
+    body.innerHTML = plantillaCarEmpty();
+    let btnsCart = document.querySelector("#btns-cart");
+    btnsCart.style.display = "none";
+  };
 };

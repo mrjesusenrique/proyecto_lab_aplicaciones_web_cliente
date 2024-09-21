@@ -40,9 +40,7 @@ export const createModal = (product) => {
   setTimeout(() => {
     let btnAddToCart = document.querySelector(`#add-to-cart-${id}`);
     btnAddToCart.onclick = () => {
-      let objlocalStorage = JSON.parse(
-        localStorage.getItem("productsCar")
-      );
+      let objlocalStorage = JSON.parse(localStorage.getItem("productsCar")) || [];
       let producExist = objlocalStorage.find((prod) => prod.id === id);
       let index = objlocalStorage.findIndex((prod) => prod.id === id);
 
