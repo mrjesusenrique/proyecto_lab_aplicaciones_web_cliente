@@ -7,10 +7,15 @@ export const renderButtonShop = () => {
 
     const iconShopButton = document.createElement("i");
     iconShopButton.className = "bi bi-cart-fill text-white";
+
+    const cartQuantityBadge = document.createElement("span");
+    cartQuantityBadge.className = "badge bg-danger rounded-pill ms-2";
     shopButton.appendChild(iconShopButton);
+    shopButton.appendChild(cartQuantityBadge);
+
     document.querySelector("#navbar").appendChild(shopButton);
 
-    updateCartIcon(iconShopButton);
+    updateCartIcon();
 
     shopButton.addEventListener("click", function () {
       const offcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
@@ -18,28 +23,26 @@ export const renderButtonShop = () => {
       aside();
     });
 
-    observeLocalStorageChange(iconShopButton);
+    observeLocalStorageChange(cartQuantityBadge);
   });
 };
 
-const updateCartIcon = (iconElement) => {
+export function updateCartIcon() {
   const productsInCart = JSON.parse(localStorage.getItem("productsCar")) || [];
+  const cartQuantityBadge = document.querySelector(".badge");
 
-  if (productsInCart.length > 0) {
-    iconElement.className = "bi bi-cart-check-fill text-white";
-  } else {
-    iconElement.className = "bi bi-cart-fill text-white";
-  }
-};
+  cartQuantityBadge.textContent = productsInCart.length;
+  cartQuantityBadge.style.display = productsInCart.length > 0 ? "inline" : "none";
+}
 
-const observeLocalStorageChange = (iconElement) => {
-  updateCartIcon(iconElement);
+const observeLocalStorageChange = (cartQuantityBadge) => {
+  updateCartIcon(cartQuantityBadge);
 
   const originalSetItem = localStorage.setItem;
   localStorage.setItem = function (key) {
     originalSetItem.apply(this, arguments);
     if (key === "productsCar") {
-      updateCartIcon(iconElement);
+      updateCartIcon(cartQuantityBadge);
     }
   };
 };

@@ -1,4 +1,5 @@
 import { showMessage } from "../showMessage/showMessage.js";
+import { updateCartIcon } from "../shop/shop.js";
 
 const plantillaCarEmpty = () => {
   return `
@@ -14,13 +15,13 @@ export const aside = () => {
 
   if (producStorage.length === 0) {
     body.innerHTML = plantillaCarEmpty();
-    
+
     return;
   }
 
-  if(producStorage.length){
-    let btnsCart=document.querySelector("#btns-cart");
-    btnsCart.style.display="block";
+  if (producStorage.length) {
+    let btnsCart = document.querySelector("#btns-cart");
+    btnsCart.style.display = "block";
   }
 
   producStorage.forEach((p) => {
@@ -28,27 +29,21 @@ export const aside = () => {
       <div class="card mb-3" style="max-width: 540px;" id="card-${p.id}">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="${p.image}" class="img-fluid rounded-start" alt="${
-      p.title
-    }">
+            <img src="${p.image}" class="img-fluid rounded-start" alt="${p.title}">
           </div>
           <div class="col-md-8">
-            <div class="card-body d-flex flex-column justify-content-center align-items-center">
-              <span class="fs-4 fw-bold text-center mb-3" id="price-${p.id}">
+            <div class="card-body   
+ d-flex flex-column justify-content-center align-items-center">
+              <h5 class="card-title   
+ text-center mb-3">${p.title}</h5> <span class="fs-4 fw-bold text-center mb-3" id="price-${p.id}">
                 $ ${p.price}
               </span>
               <div id="buttons-${p.id}">
-                ${
-                  p.quantity === 1
-                    ? `<button type="button" class="btn btn-danger" id="delete-${p.id}">Eliminar</button>`
-                    : `<button type="button" class="btn btn-danger" id="decrease-${p.id}">-</button>`
-                }
-                <span class="mx-4 fs-5" id="quantity-${p.id}">${
-      p.quantity
-    }</span>
-                <button type="button" class="btn btn-info" id="increase-${
-                  p.id
-                }">+</button>
+                ${p.quantity === 1
+                  ? `<button type="button" class="btn btn-danger" id="delete-${p.id}">Eliminar</button>`
+                  : `<button type="button" class="btn btn-danger" id="decrease-${p.id}">-</button>`}
+                <span class="mx-4 fs-5" id="quantity-${p.id}">${p.quantity}</span>
+                <button type="button" class="btn btn-info" id="increase-${p.id}">+</button>
               </div>
             </div>
           </div>
@@ -130,19 +125,23 @@ export const aside = () => {
     }, 0);
   });
 
-  let btnFinalizar=document.querySelector('#btn-finalizar');
+  let btnFinalizar = document.querySelector('#btn-finalizar');
   btnFinalizar.onclick = () => {
     localStorage.clear();
     body.innerHTML = plantillaCarEmpty();
     let btnsCart = document.querySelector("#btns-cart");
     btnsCart.style.display = "none";
-  };
+    updateCartIcon();
+  }
 
-  let btnCancelar=document.querySelector('#btn-cancelar');
-  btnCancelar.onclick = () => {
-    localStorage.clear();
-    body.innerHTML = plantillaCarEmpty();
-    let btnsCart = document.querySelector("#btns-cart");
-    btnsCart.style.display = "none";
-  };
 };
+
+let btnCancelar = document.querySelector('#btn-cancelar');
+btnCancelar.onclick = () => {
+  localStorage.clear();
+  body.innerHTML = plantillaCarEmpty();
+  let btnsCart = document.querySelector("#btns-cart");
+  btnsCart.style.display = "none";
+  updateCartIcon();
+};
+
