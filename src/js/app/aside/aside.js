@@ -133,15 +133,15 @@ export const aside = () => {
     btnsCart.style.display = "none";
     updateCartIcon();
   }
-
+  let btnCancelar = document.querySelector('#btn-cancelar');
+  btnCancelar.onclick = () => {
+    localStorage.clear();
+    body.innerHTML = plantillaCarEmpty();
+    let btnsCart = document.querySelector("#btns-cart");
+    btnsCart.style.display = "none";
+    updateCartIcon();
+  };
 };
 
-let btnCancelar = document.querySelector('#btn-cancelar');
-btnCancelar.onclick = () => {
-  localStorage.clear();
-  body.innerHTML = plantillaCarEmpty();
-  let btnsCart = document.querySelector("#btns-cart");
-  btnsCart.style.display = "none";
-  updateCartIcon();
-};
+
 
