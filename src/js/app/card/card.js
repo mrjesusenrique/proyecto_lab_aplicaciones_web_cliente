@@ -4,7 +4,7 @@ import { errorToast } from "../../../errorToast/errorToast.js"
 
 let cardContainer = document.querySelector("#template-card");
 
-const createCardElement = (product) => {
+export const createCardElement = (product) => {
   const { id, image, title, price } = product;
 
   const card = document.createElement("div");
