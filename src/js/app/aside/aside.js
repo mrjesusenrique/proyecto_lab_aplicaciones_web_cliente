@@ -80,7 +80,6 @@ export const aside = () => {
             decreaseQuantity;
         }
         document.querySelector(`#increase-${p.id}`).onclick = increaseQuantity;
-        resetearCostoTotal();
         calcularTotal();
       };
 
@@ -109,7 +108,6 @@ export const aside = () => {
           localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
           updateButtons();
         }
-        resetearCostoTotal();
         calcularTotal();
       };
 
@@ -118,8 +116,7 @@ export const aside = () => {
         const index = objLocalStorage.findIndex((prod) => prod.id === p.id);
         objLocalStorage.splice(index, 1);
         document.querySelector(`#card-${p.id}`).remove();
-        showMessage("Producto eliminado del carrito");
-          if (objLocalStorage.length == []) {
+          if (objLocalStorage.length === 0) {
             body.innerHTML = plantillaCarEmpty();
             console.log("eliminar")
             let btnsCart = document.querySelector("#btns-cart");
@@ -129,12 +126,9 @@ export const aside = () => {
           showMessage("Producto eliminado del carrito");
           setTimeout(() => {
             calcularTotal();
-            //resetearCostoTotal();
           }, 10);
       };
-
       updateButtons();
-      calcularTotal();
     }, 0);
   });
 
@@ -143,7 +137,7 @@ export const aside = () => {
     const totalPrice = document.querySelector("#totalPrice");
     let arrayProducts = JSON.parse(localStorage.getItem("productsCar"))
 
-    if(arrayProducts != []){
+    if(arrayProducts != [] && arrayProducts != null){
       arrayProducts.forEach((p) => {
         total += p.price * p.quantity
       })
@@ -152,12 +146,11 @@ export const aside = () => {
       }else{ 
         totalPrice.innerHTML = "Total: $" + total.toFixed(2)
       }
+    }else{
+       totalPrice.innerHTML = ""
     }
   }
 
-  function resetearCostoTotal(){
-    document.querySelector("#totalPrice").innerHTML = ""
-  }
 
   let btnFinalizar = document.querySelector('#btn-finalizar');
   btnFinalizar.onclick = () => {
@@ -166,6 +159,7 @@ export const aside = () => {
     let btnsCart = document.querySelector("#btns-cart");
     btnsCart.style.display = "none";
     updateCartIcon();
+    calcularTotal();
   }
   let btnCancelar = document.querySelector('#btn-cancelar');
   btnCancelar.onclick = () => {
@@ -174,6 +168,7 @@ export const aside = () => {
     let btnsCart = document.querySelector("#btns-cart");
     btnsCart.style.display = "none";
     updateCartIcon();
+    calcularTotal();
   };
 };
 
