@@ -127,8 +127,10 @@ export const aside = () => {
           }
           localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
           showMessage("Producto eliminado del carrito");
-          resetearCostoTotal();
-          calcularTotal();
+          setTimeout(() => {
+            calcularTotal();
+            //resetearCostoTotal();
+          }, 10);
       };
 
       updateButtons();
@@ -139,14 +141,17 @@ export const aside = () => {
   function calcularTotal() {
     let total= 0;
     const totalPrice = document.querySelector("#totalPrice");
+    let arrayProducts = JSON.parse(localStorage.getItem("productsCar"))
 
-    if(producStorage.length){
-      producStorage.forEach((p) => {
+    if(arrayProducts != []){
+      arrayProducts.forEach((p) => {
         total += p.price * p.quantity
       })
-      totalPrice.innerHTML = "Total: $" + total.toFixed(2)
-    }else{
-      totalPrice.innerHTML = ""
+      if(total==0){
+        totalPrice.innerHTML = ""
+      }else{ 
+        totalPrice.innerHTML = "Total: $" + total.toFixed(2)
+      }
     }
   }
 
