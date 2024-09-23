@@ -11,11 +11,14 @@ const plantillaCarEmpty = () => {
 export const aside = () => {
   const body = document.querySelector(".offcanvas-body");
   const producStorage = JSON.parse(localStorage.getItem("productsCar")) || [];
+  let total= 0;
+  const totalPrice = document.querySelector("#totalPrice");
   body.innerHTML = "";
+  
 
   if (producStorage.length === 0) {
     body.innerHTML = plantillaCarEmpty();
-
+    totalPrice.innerHTML = "";
     return;
   }
 
@@ -50,10 +53,9 @@ export const aside = () => {
         </div>
       </div>
     `;
-
+    total += p.price * p.quantity
+    totalPrice.innerHTML = "Total: $" + total
     body.innerHTML += aside;
-
-
 
     setTimeout(() => {
       const spanQuantity = document.querySelector(`#quantity-${p.id}`);
@@ -78,6 +80,8 @@ export const aside = () => {
             decreaseQuantity;
         }
         document.querySelector(`#increase-${p.id}`).onclick = increaseQuantity;
+        resetearCostoTotal();
+        calcularTotal();
       };
 
       const increaseQuantity = () => {
@@ -89,6 +93,7 @@ export const aside = () => {
         objLocalStorage[index] = p;
         localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
         updateButtons();
+        calcularTotal();
       };
 
       const decreaseQuantity = () => {
@@ -104,26 +109,50 @@ export const aside = () => {
           localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
           updateButtons();
         }
+        resetearCostoTotal();
+        calcularTotal();
       };
 
-      const deleteProduct = () => {
+      const deleteProduct = () => { // no se está borrando el producto[0] de una lista del mismo producto
         const objLocalStorage = JSON.parse(localStorage.getItem("productsCar"));
         const index = objLocalStorage.findIndex((prod) => prod.id === p.id);
         objLocalStorage.splice(index, 1);
         document.querySelector(`#card-${p.id}`).remove();
-        if (objLocalStorage.length === 0) {
-          body.innerHTML = plantillaCarEmpty();
-          console.log("eliminar")
-          let btnsCart = document.querySelector("#btns-cart");
-          btnsCart.style.display = "none";
-        }
-        localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
         showMessage("Producto eliminado del carrito");
+          if (objLocalStorage.length == []) {
+            body.innerHTML = plantillaCarEmpty();
+            console.log("eliminar")
+            let btnsCart = document.querySelector("#btns-cart");
+            btnsCart.style.display = "none";
+          }
+          localStorage.setItem("productsCar", JSON.stringify(objLocalStorage));
+          showMessage("Producto eliminado del carrito");
+          resetearCostoTotal();
+          calcularTotal();
       };
 
       updateButtons();
+      calcularTotal();
     }, 0);
   });
+
+  function calcularTotal() {
+    let total= 0;
+    const totalPrice = document.querySelector("#totalPrice");
+
+    if(producStorage.length){
+      producStorage.forEach((p) => {
+        total += p.price * p.quantity
+      })
+      totalPrice.innerHTML = "Total: $" + total.toFixed(2)
+    }else{
+      totalPrice.innerHTML = ""
+    }
+  }
+
+  function resetearCostoTotal(){
+    document.querySelector("#totalPrice").innerHTML = ""
+  }
 
   let btnFinalizar = document.querySelector('#btn-finalizar');
   btnFinalizar.onclick = () => {
