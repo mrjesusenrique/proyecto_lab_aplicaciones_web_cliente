@@ -39,7 +39,7 @@ export const aside = () => {
  d-flex flex-column justify-content-center align-items-center">
               <h5 class="card-title   
  text-center mb-3">${p.title}</h5> <span class="fs-4 fw-bold text-center mb-3" id="price-${p.id}">
-                $ ${p.price}
+                $ ${p.price * p.quantity}
               </span>
               <div id="buttons-${p.id}">
                 ${p.quantity === 1
