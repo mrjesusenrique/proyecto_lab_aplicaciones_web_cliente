@@ -3,7 +3,7 @@ import { showMessage } from "../showMessage/showMessage.js";
 export const createModal = (product) => {
   const { id, description, image, title, price } = product;
 
-  let modalQuantity = 1; // Default quantity
+  let modalQuantity = 1;
 
   let modal = `<div class="modal-dialog">
     <div class="modal-content">
@@ -69,9 +69,9 @@ export const createModal = (product) => {
   setTimeout(() => {
     let btnAddToCart = document.querySelector(`#add-to-cart-${id}`);
     btnAddToCart.onclick = () => {
-      let objLocalStorage = JSON.parse(localStorage.getItem("productsCar")) || [];
+      let objLocalStorage =
+        JSON.parse(localStorage.getItem("productsCar")) || [];
       let productExists = objLocalStorage.find((prod) => prod.id === id);
-      let index = objLocalStorage.findIndex((prod) => prod.id === id);
 
       if (productExists) {
         productExists.quantity += modalQuantity;

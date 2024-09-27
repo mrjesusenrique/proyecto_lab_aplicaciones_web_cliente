@@ -23,7 +23,7 @@ export const renderButtonShop = () => {
       aside();
     });
 
-    observeLocalStorageChange(cartQuantityBadge);
+    observeLocalStorageChange();
   });
 };
 
@@ -35,14 +35,14 @@ export function updateCartIcon() {
   cartQuantityBadge.style.display = productsInCart.length > 0 ? "inline" : "none";
 }
 
-const observeLocalStorageChange = (cartQuantityBadge) => {
-  updateCartIcon(cartQuantityBadge);
+const observeLocalStorageChange = () => {
+  updateCartIcon();
 
   const originalSetItem = localStorage.setItem;
   localStorage.setItem = function (key) {
     originalSetItem.apply(this, arguments);
     if (key === "productsCar") {
-      updateCartIcon(cartQuantityBadge);
+      updateCartIcon();
     }
   };
 };

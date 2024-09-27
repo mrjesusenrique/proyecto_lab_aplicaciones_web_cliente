@@ -48,7 +48,6 @@ export const createCards = () => {
       });
     })
     .catch((error) => {
-      //console.error("Error al obtener los productos:", error);
       errorToast(`Error al obtener las categorias ${error}`)
     });
 };
