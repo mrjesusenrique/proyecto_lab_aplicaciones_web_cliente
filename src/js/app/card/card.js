@@ -1,6 +1,6 @@
 import { getProducts } from "../../api/api.js";
 import { createModal } from "../modal/modal.js";
-import { errorToast } from "../../../errorToast/errorToast.js"
+import { errorToast } from "../../../errorToast/errorToast.js";
 
 let cardContainer = document.querySelector("#template-card");
 
@@ -47,8 +47,12 @@ export const addDetailButtonListeners = (products) => {
 };
 
 export const createCards = () => {
+  const spinner = document.querySelector("#spinner");
+  spinner.style.display = "block";
+
   getProducts()
     .then((products) => {
+      spinner.style.display = "none";
       products.forEach((product) => {
         const cardElement = createCardElement(product);
         cardContainer.appendChild(cardElement);
@@ -57,6 +61,7 @@ export const createCards = () => {
       addDetailButtonListeners(products);
     })
     .catch((error) => {
+      spinner.style.display = "none";
       errorToast(`Error al obtener las categorias ${error}`);
     });
 };
