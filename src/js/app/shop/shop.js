@@ -4,7 +4,7 @@ export const renderButtonShop = () => {
   document.addEventListener("DOMContentLoaded", function () {
     const shopButton = document.createElement("button");
     shopButton.className = "btn-custom";
-    shopButton.style = "width: 1px;"
+    shopButton.style = "width: 65px;"
     shopButton.setAttribute("aria-label", "Carrito de compras");
 
     const iconShopButton = document.createElement("i");
