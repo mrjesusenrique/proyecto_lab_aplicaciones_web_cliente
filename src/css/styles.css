@@ -1,15 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+:root {
+  --primary: #f35b5d;
+  --acolor: #ffffff;
+  --bcolor: #dadada;
+  --ccolor: #242424;
+  --dcolor: #000000;
+}
+
+:root[data-theme="dark"] {
+  --primary: #f35b5d;
+  --acolor: #000000;
+  --bcolor: #242424;
+  --ccolor: #dadada;
+  --dcolor: #ffffff;
+}
 
 body {
   font-family: "Nunito Sans", sans-serif;
+  background-color: var(--acolor);
+  color: var(--ccolor);
 }
 
+.cambiar-tema .btn i {
+  color: var(--primary);
+  font-size: 25px;
+  transition: 0.1s;
+}
+
+.cambiar-tema button i:hover {
+  color: var(--primary);
+  transform: scale(1.2);
+}
+
+button:focus {
+  outline: none;
+}
+
+
 .btn-custom {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
+  background-color: transparent; /* Color de fondo transparente en modo claro */
+  color: white;
+  border: none; /* Sin borde */
+}
+
+/* Estilos para el botón de carrito en modo oscuro */
+:root[data-theme="dark"] .btn-custom {
+  background-color: dark; /* Color de fondo en modo oscuro */
+  color: var(--dcolor); /* Color del ícono o texto en modo oscuro */
+}
+
+/* Opcional: Cambiar color del ícono dentro del botón */
+:root[data-theme="dark"] .btn-custom i {
+  color: white; /* Cambiar el color del ícono en modo oscuro */
+}
+
+/* Estilo para el ícono del carrito */
+.nav-link i {
+  font-size: 25px; /* Ajusta el tamaño del ícono según sea necesario */
+}
+
+.theme-card {
+  background-color: var(--acolor); /* Color de fondo en modo claro */
+  color: var(--ccolor); /* Color del texto en modo claro */
+}
+
+/* Estilos para el modo oscuro */
+:root[data-theme="dark"] .theme-card {
+  background-color: var(--bcolor); /* Color de fondo en modo oscuro */
+  color: var(--dcolor); /* Color del texto en modo oscuro */
 }
