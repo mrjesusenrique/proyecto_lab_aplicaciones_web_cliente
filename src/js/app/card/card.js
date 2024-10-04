@@ -12,7 +12,7 @@ export const createCardElement = (product) => {
   card.setAttribute("key", title);
 
   card.innerHTML = `
-  <div class="d-flex flex-column card pt-5 pb-5" title="${title}" style="height: 550px">
+  <div class="d-flex flex-column card pt-5 pb-5 theme-card" title="${title}" style="height: 550px">
     <img src="${image}" class="card-img-top img-fluid object-fit-contain h-75 p-2" alt="${title}" />
     <div class="card-body text-center">
       <h5 class="card-title text-truncate" data-bs-toggle="tooltip" data-bs-placement="bottom" >
