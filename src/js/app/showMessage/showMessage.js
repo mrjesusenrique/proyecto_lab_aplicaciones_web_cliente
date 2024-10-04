@@ -9,9 +9,11 @@ export const showMessage = (msg) => {
                   </div>`;
 
   let toastContainer = document.querySelector(".toast-container");
-  toastContainer.innerHTML += toastHtml;
+  toastContainer.innerHTML = toastHtml;
 
   let toast = document.querySelector(".toast");
-  const toastBootstrap = new bootstrap.Toast(toast);
+  const toastBootstrap = new bootstrap.Toast(toast, {
+    delay: 2000,
+  });
   toastBootstrap.show();
 };

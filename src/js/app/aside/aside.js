@@ -164,7 +164,7 @@ export const aside = () => {
   const addCompra = () => {
     let comprasExistentes = JSON.parse(localStorage.getItem("compras")) || [];
     let arrayProducts = JSON.parse(localStorage.getItem("productsCar")) || [];
-    
+
     const totalCompra = arrayProducts.reduce(
       (total, producto) => total + producto.price * producto.quantity,
       0
@@ -191,6 +191,7 @@ export const aside = () => {
     btnsCart.style.display = "none";
     updateCartIcon();
     calcularTotal();
+    showMessage("¡Compra exitosa!");
   };
 
   let btnCancelar = document.querySelector("#btn-cancelar");
