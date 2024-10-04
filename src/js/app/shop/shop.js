@@ -18,7 +18,9 @@ export const renderButtonShop = () => {
     updateCartIcon();
 
     shopButton.addEventListener("click", function () {
-      const offcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
+      const offcanvas = new bootstrap.Offcanvas(
+        document.getElementById("offcanvasRight")
+      );
       offcanvas.show();
       aside();
     });
@@ -32,7 +34,8 @@ export function updateCartIcon() {
   const cartQuantityBadge = document.querySelector(".badge");
 
   cartQuantityBadge.textContent = productsInCart.length;
-  cartQuantityBadge.style.display = productsInCart.length > 0 ? "inline" : "none";
+  cartQuantityBadge.style.display =
+    productsInCart.length > 0 ? "inline" : "none";
 }
 
 const observeLocalStorageChange = () => {

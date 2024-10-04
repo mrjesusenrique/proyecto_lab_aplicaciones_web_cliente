@@ -1,4 +1,5 @@
 import { errorToast } from "../../errorToast/errorToast.js";
+
 export const getProducts = async () => {
   try {
     const products = await fetch("https://fakestoreapi.com/products");
@@ -17,7 +18,6 @@ export const getCategories = async () => {
     const data = await categories.json();
     return data;
   } catch (error) {
-    //console.warn(`Error al obtener las categorias ${error}`);
     errorToast(`Error al obtener las categorias ${error}`)
   }
 };

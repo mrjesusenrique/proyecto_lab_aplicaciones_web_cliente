@@ -18,8 +18,9 @@
         <a class="navbar-brand text-light" href="#">Ecommerce - ISTEA</a>
         <div class="collapse navbar-collapse justify-content-end" id="navbar">
           <ul class="navbar-nav" style="margin-right: 20px;">
-            <li class="nav-item">
+            <li class="nav-item d-flex flex-row">
               <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+              <a class="nav-link active text-light" id="aside-compras" aria-current="page" href="#">Compras</a>
             </li>
           </ul>
         </div>
@@ -39,12 +40,12 @@
     </div>
     <section class="container">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 g-md-2 g-lg-4" id="template-card">
-        
+
       </div>
     </section>
     <div class="modal fade" id="staticBackdrop"></div>
     <div aria-live="polite" aria-atomic="true" class="position-relative">
-      
+
     </div>
     <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
@@ -54,7 +55,7 @@
       <div class="offcanvas-body">
       </div>
       <div class="d-flex justify-content-center mb-3"></div>
-        <label class="fs-4 fw-bold text-center mb-3" id="totalPrice"></label>
+      <label class="fs-4 fw-bold text-center mb-3" id="totalPrice"></label>
       </div>
 
       <div class="d-flex justify-content-center mb-3">
@@ -64,6 +65,22 @@
         </div>
       </div>
     </aside>
+
+    <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightCompras" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Lista de Compras</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body-compras p-3 overflow-auto">
+      </div>
+      <div class="d-flex justify-content-center mb-3">
+        <div id="btns-cart" style="display: none;">
+          <button type="button" class="btn btn-primary" id="btn-finalizar">Finalizar Compra</button>
+          <button type="button" class="btn btn-danger ms-1" id="btn-cancelar">Cancelar Compra</button>
+        </div>
+      </div>
+    </aside>
+
     <div class="toast-container end-0 p-3 position-fixed bottom-0 z-5">
     </div>
   </main>
