@@ -203,5 +203,6 @@ export const aside = () => {
     btnsCart.style.display = "none";
     updateCartIcon();
     calcularTotal();
+    showMessage("Has cancelado la compra");
   };
 };
